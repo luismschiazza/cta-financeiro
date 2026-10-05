@@ -1,0 +1,31 @@
+# Configuração e credenciais
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+# Dependências e builds
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+# Dados e cópias privadas
+data/
+imports/
+exports/
+backups/
+*.dump
+*.backup
+*.ofx
+*.dbf
+*.dbt
+# Logs e arquivos locais
+*.log
+__pycache__/
+.venv/
+.DS_Store
+Thumbs.db
+.idea/

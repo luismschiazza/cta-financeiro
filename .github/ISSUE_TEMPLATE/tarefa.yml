@@ -1,0 +1,28 @@
+name: Tarefa
+description: Objetivo pequeno com resultado verificável
+title: ""
+body:
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      description: Qual comportamento ou base será entregue?
+    validations:
+      required: true
+  - type: textarea
+    id: aceite
+    attributes:
+      label: Critérios de aceite
+      description: Checklist curto e testável.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencias
+    attributes:
+      label: Dependências
+  - type: textarea
+    id: validacao
+    attributes:
+      label: Validação prevista
+    validations:
+      required: true

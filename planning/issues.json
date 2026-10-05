@@ -1,0 +1,337 @@
+[
+  {
+    "id": "F01",
+    "phase": "Fundação",
+    "title": "[F01] Configurar repositório privado e regras do GitHub",
+    "dependencies": [],
+    "body": "## Objetivo\n\nPublicar a fundação e aplicar as regras reais do repositório.\n\n## Dependências\n\nNenhuma.\n\n## Critérios de aceite\n\n- [ ] Repositório privado criado com main, README, templates e documentação.\n- [ ] Workflow foundation executado com sucesso e check configurado conforme plano disponível.\n- [ ] Squash, PR, bloqueio de force push/exclusão e resolução de conversas configurados onde suportados.\n- [ ] Backlog aberto como issues com dependências; limitações de proteção registradas.\n\n## Validação\n\nConferir visibilidade, SHA, execução de Actions e evidências das configurações em docs/github-setup.md.\n",
+    "status": "A fazer",
+    "priority": "P0",
+    "order": 1,
+    "blocked": true,
+    "block_reason": "Publicação no GitHub aguarda autorização para acesso pelo navegador."
+  },
+  {
+    "id": "F02",
+    "phase": "Fundação",
+    "title": "[F02] Iniciar backend e fixar ferramentas e versões",
+    "dependencies": [
+      "F01"
+    ],
+    "body": "## Objetivo\n\nCriar apps/api com NestJS e TypeScript estrito, sem módulos financeiros.\n\n## Dependências\n\nF01\n\n## Critérios de aceite\n\n- [ ] Node/npm/Nest/TypeScript/Jest e PostgreSQL verificados e versões exatas registradas; ORM decidido na F05.\n- [ ] package-lock.json e configuração do runtime versionados; instalação com npm ci.\n- [ ] ESLint, formatação, typecheck, build e testes configurados com comandos reais.\n- [ ] Endpoint de saúde mínimo e teste com resposta esperada; sem passWithNoTests.\n\n## Validação\n\nInstalar do zero, executar lint/typecheck/build e testar saúde. Registrar versões e comandos no README.\n",
+    "status": "Backlog",
+    "priority": "P0",
+    "order": 2,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "F03",
+    "phase": "Fundação",
+    "title": "[F03] Validar configuração e separar ambientes",
+    "dependencies": [
+      "F02"
+    ],
+    "body": "## Objetivo\n\nFalhar cedo quando a configuração do ambiente estiver ausente, inválida ou incompatível.\n\n## Dependências\n\nF02\n\n## Critérios de aceite\n\n- [ ] Contrato .env.example atualizado com a estratégia real; secrets fora do Git.\n- [ ] APP_ENV, portas, URLs, banco, CORS, TLS e secrets validados no startup.\n- [ ] Testes rejeitam destino de produção e integrações reais; confirmar identidade do destino.\n- [ ] Erros e logs não mostram credenciais; pagamentos desabilitados no MVP.\n\n## Validação\n\nTestar configurações válidas e inválidas de cada ambiente, placeholders e tentativa de conectar test a prod.\n",
+    "status": "Backlog",
+    "priority": "P0",
+    "order": 3,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "F04",
+    "phase": "Fundação",
+    "title": "[F04] Subir PostgreSQL local e banco descartável de testes",
+    "dependencies": [
+      "F02",
+      "F03"
+    ],
+    "body": "## Objetivo\n\nPermitir desenvolver e testar banco/API com recursos isolados e reproduzíveis.\n\n## Dependências\n\nF02, F03\n\n## Critérios de aceite\n\n- [ ] Compose local com imagem fixada, porta em loopback, healthcheck e volume próprio.\n- [ ] Banco test descartável por execução e sem acesso ao banco local/dev.\n- [ ] Usuários de aplicação e migrations separados; secrets de exemplo são fictícios.\n- [ ] Documentar comandos para criar/testar/remover somente recursos descartáveis; preservar banco de estudo.\n\n## Validação\n\nInicializar local e test, conferir isolamento e permissões; demonstrar remoção do banco de teste sem afetar local.\n",
+    "status": "Backlog",
+    "priority": "P0",
+    "order": 4,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "F05",
+    "phase": "Fundação",
+    "title": "[F05] Criar mecanismo de migrations e instalação reproduzível",
+    "dependencies": [
+      "F04"
+    ],
+    "body": "## Objetivo\n\nEscolher uma única ferramenta/ORM e versionar o schema sem sincronização automática.\n\n## Dependências\n\nF04\n\n## Critérios de aceite\n\n- [ ] Decisão curta sobre ORM e migrations; synchronize/destructive reset desabilitados.\n- [ ] Comandos reais para criar, aplicar e consultar estado das migrations.\n- [ ] Histórico/checksum e exclusão mútua definidos; aplicação não faz DDL no startup.\n- [ ] Instalação vazia e reexecução sem efeito duplicado; estratégia de upgrade validada.\n- [ ] Banco de estudo preservado e plano de adaptação explícito; seeds fictícios separados.\n\n## Validação\n\nAplicar migrations em PostgreSQL novo, reexecutar e testar alteração indevida no histórico. Validar upgrade de uma base aprovada.\n",
+    "status": "Backlog",
+    "priority": "P0",
+    "order": 5,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "F06",
+    "phase": "Fundação",
+    "title": "[F06] Completar CI com banco, testes e segurança",
+    "dependencies": [
+      "F02",
+      "F03",
+      "F04",
+      "F05"
+    ],
+    "body": "## Objetivo\n\nBloquear merge quando código, migrations ou validações essenciais falharem.\n\n## Dependências\n\nF02, F03, F04, F05\n\n## Critérios de aceite\n\n- [ ] Checks de lint, typecheck, unit, integration, migrations, build e security executam comandos reais.\n- [ ] Integração usa PostgreSQL descartável; migrations testam banco vazio e upgrade.\n- [ ] Scanner de segredos, dependências e workflows configurado; vulnerabilidades altas/críticas relevantes bloqueiam.\n- [ ] required-checks falha em job ausente, cancelado ou com erro; sem mascarar falhas.\n- [ ] Actions por SHA, menor privilégio e checks obrigatórios configurados no GitHub.\n\n## Validação\n\nPR válido passa; introduzir falha controlada em build, constraint, migration e scan para comprovar bloqueio. Remover as falhas antes do merge.\n",
+    "status": "Backlog",
+    "priority": "P0",
+    "order": 6,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "F07",
+    "phase": "Fundação",
+    "title": "[F07] Implementar autenticação e permissões",
+    "dependencies": [
+      "F06"
+    ],
+    "body": "## Objetivo\n\nProteger a API antes de disponibilizar dados financeiros.\n\n## Dependências\n\nF06\n\n## Critérios de aceite\n\n- [ ] Estratégia de sessão/token documentada com hashing seguro de senha e validade/revogação.\n- [ ] Perfis mínimos definidos com o dono e permissão por operação.\n- [ ] Usuário inicial criado por procedimento seguro, sem senha fixa versionada.\n- [ ] Tentativas de acesso inválidas limitadas e logs sem credenciais.\n\n## Validação\n\nTestar login válido/inválido, expiração/revogação e acesso negado por perfil; autenticação sozinha não basta.\n",
+    "status": "Backlog",
+    "priority": "P0",
+    "order": 7,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "F08",
+    "phase": "Fundação",
+    "title": "[F08] Adicionar auditoria e observabilidade",
+    "dependencies": [
+      "F07"
+    ],
+    "body": "## Objetivo\n\nRastrear ações sensíveis e diagnosticar falhas sem expor dados pessoais.\n\n## Dependências\n\nF07\n\n## Critérios de aceite\n\n- [ ] Auditoria com ator, instante, ação e referência; identidade da aplicação não apaga histórico.\n- [ ] Logs estruturados com correlação e redação de secrets/dados pessoais.\n- [ ] Endpoints de health/liveness/readiness adequados sem divulgar detalhes privados.\n- [ ] Alertas mínimos e regras de retenção/acesso documentados.\n\n## Validação\n\nExecutar ação permitida e negada, conferir eventos, falha de banco e ausência de tokens/extratos nos logs.\n",
+    "status": "Backlog",
+    "priority": "P0",
+    "order": 8,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "F09",
+    "phase": "Fundação",
+    "title": "[F09] Preparar entrega em dev e staging",
+    "dependencies": [
+      "F06",
+      "F08"
+    ],
+    "body": "## Objetivo\n\nEscolher infraestrutura e promover o mesmo artefato entre ambientes isolados.\n\n## Dependências\n\nF06, F08\n\n## Critérios de aceite\n\n- [ ] Hospedagem/registry/secrets escolhidos com orçamento e configuração documentada.\n- [ ] Dev e staging com bancos, contas e redes próprios; apenas dados sintéticos ou anonimizados.\n- [ ] Build gera SHA/digest/versão; promoção usa mesmo artefato com CI aprovada.\n- [ ] Migrations executadas uma vez por ambiente com credencial separada; deploy serializado.\n- [ ] Smoke tests e falha de promoção registrados; sem cancelar migrations em andamento.\n\n## Validação\n\nPublicar candidato em dev e staging; conferir digest igual, isolamento e bloqueio de candidato com CI reprovada.\n",
+    "status": "Backlog",
+    "priority": "P0",
+    "order": 9,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "F10",
+    "phase": "Fundação",
+    "title": "[F10] Validar backup, recuperação e liberação de produção",
+    "dependencies": [
+      "F09"
+    ],
+    "body": "## Objetivo\n\nPreparar produção com evidência de recuperação e aprovação humana.\n\n## Dependências\n\nF09\n\n## Critérios de aceite\n\n- [ ] RPO/RTO/retenção/responsável definidos com o dono e custos avaliados.\n- [ ] Backup criptografado fora do host, monitorado e sem permissão de exclusão para a aplicação.\n- [ ] Restauração em ambiente isolado mede tempo e valida schema, contagens e totais.\n- [ ] Prod isolada; liberação explícita e mesmo digest aprovado em staging.\n- [ ] Rollback de aplicação e procedimento de falha de migration documentados; sem restauração automática.\n\n## Validação\n\nSimular perda/falha com dados fictícios e comprovar recuperação dentro dos objetivos. Validar mecanismo real de aprovação; não lançar operações reais nesta issue.\n",
+    "status": "Backlog",
+    "priority": "P0",
+    "order": 10,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "B01",
+    "phase": "Backend e banco",
+    "title": "[B01] Cadastrar e consultar contas bancárias",
+    "dependencies": [
+      "F07",
+      "F08",
+      "F10"
+    ],
+    "body": "## Objetivo\n\nEntregar o primeiro módulo financeiro com migration, API e permissão.\n\n## Dependências\n\nF07, F08, F10\n\n## Critérios de aceite\n\n- [ ] Migration de contas com PK, campos obrigatórios e estado ativo/inativo.\n- [ ] DTO, serviço e consultas parametrizadas; paginação e autorização.\n- [ ] Dados fictícios Bradesco PJ para desenvolvimento; seeds fora de produção.\n- [ ] Não excluir conta com histórico financeiro; auditar mudanças.\n\n## Validação\n\nTestar cadastro/consulta, payload inválido, perfil sem acesso e constraint de conta vinculada.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 11,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "B02",
+    "phase": "Backend e banco",
+    "title": "[B02] Registrar movimentações e regras de dinheiro",
+    "dependencies": [
+      "B01",
+      "F05"
+    ],
+    "body": "## Objetivo\n\nPersistir movimentações exatas, rastreáveis e vinculadas à conta.\n\n## Dependências\n\nB01, F05\n\n## Critérios de aceite\n\n- [ ] Migration com FK, valor NUMERIC positivo, tipo permitido e datas apropriadas.\n- [ ] Identificador externo composto com conta quando presente; regra para origem sem ID.\n- [ ] Decimal/string no contrato; rejeitar precisão indevida e campos inválidos.\n- [ ] Preservar origem/histórico; correção autorizada e auditada.\n- [ ] Regras aplicadas em serviço e banco, inclusive concorrência.\n\n## Validação\n\nTestar valores zero/negativos/limites, FK inválida, dinheiro exato, duplicidade concorrente e transações legítimas semelhantes.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 12,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "B03",
+    "phase": "Backend e banco",
+    "title": "[B03] Importar extratos por lote sem duplicar",
+    "dependencies": [
+      "B02"
+    ],
+    "body": "## Objetivo\n\nImportar um formato de extrato confirmado a partir de amostra fictícia/sanitizada.\n\n## Dependências\n\nB02\n\n## Critérios de aceite\n\n- [ ] Formato escolhido após examinar amostra; limites de tamanho/linhas e parser seguro.\n- [ ] Lote registra origem, referência, status, contagens e erros sem expor dados em logs.\n- [ ] Reimportação/concorrência não duplicam movimentações; falha/retomada rastreáveis.\n- [ ] Linhas ambíguas ficam visíveis para análise; não descartar somente por data/valor iguais.\n- [ ] Arquivo real fica fora do Git e possui política de acesso/retenção.\n\n## Validação\n\nImportar arquivo válido, inválido, repetido e concorrente; simular falha parcial e retomada, comparando contagem e saldo.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 13,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "B04",
+    "phase": "Backend e banco",
+    "title": "[B04] Conciliar movimentações e mostrar divergências",
+    "dependencies": [
+      "B03"
+    ],
+    "body": "## Objetivo\n\nConferir registros com a fonte e manter pendências até a confirmação.\n\n## Dependências\n\nB03\n\n## Critérios de aceite\n\n- [ ] Estados e critérios de conciliação definidos com o dono.\n- [ ] API lista pendências, confirma e registra divergências com justificativa/ator.\n- [ ] Conferência respeita saldo inicial, entradas e saídas; transações atômicas.\n- [ ] Histórico não é sobrescrito silenciosamente; permissão para correções.\n\n## Validação\n\nValidar exemplo 1000 + 200 + 300 - 150 = 1350; exercitar confirmação, divergência, correção e acesso negado.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 14,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "B05",
+    "phase": "Backend e banco",
+    "title": "[B05] Gerar resumo mensal e comparar meses",
+    "dependencies": [
+      "B04"
+    ],
+    "body": "## Objetivo\n\nExpor totais consistentes para relatórios e gráficos futuros.\n\n## Dependências\n\nB04\n\n## Critérios de aceite\n\n- [ ] API com entradas, saídas, saldo e comparação de mês selecionado/anterior.\n- [ ] Fuso, data de competência bancária e critérios das categorias definidos.\n- [ ] Categorias financeiras com migrations/validações, se necessárias ao relatório.\n- [ ] Total confere com movimentações e tratamento de pendências é explícito.\n- [ ] Sem chamar saldo/fluxo de caixa de lucro contábil; consultas paginadas/indexadas conforme necessidade.\n\n## Validação\n\nTestar mês vazio, virada de ano/mês, categorias, pendências e soma exata com conjunto conhecido.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 15,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "B06",
+    "phase": "Backend e banco",
+    "title": "[B06] Conferir dados do legado para importação",
+    "dependencies": [
+      "B05"
+    ],
+    "body": "## Objetivo\n\nMapear e validar cópia dos dados antigos antes de migrá-los para operação.\n\n## Dependências\n\nB05\n\n## Critérios de aceite\n\n- [ ] Leitura da fonte sem alterar legado; mapear tabelas e regras financeiras.\n- [ ] Ensaio com cópia autorizada fora do Git, origem e resultado rastreáveis.\n- [ ] Comparar contagens, totais e divergências; normalizar datas/decimais explicitamente.\n- [ ] Importação retomável/idempotente com relatório; aprovação operacional antes de dados reais.\n\n## Validação\n\nUsar amostra controlada, comparar registros/totais e simular reexecução. Documentar divergências sem publicar dados sensíveis.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 16,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "B07",
+    "phase": "Backend e banco",
+    "title": "[B07] Avaliar integração Bradesco com mock ou sandbox",
+    "dependencies": [
+      "B03",
+      "B04"
+    ],
+    "body": "## Objetivo\n\nConfirmar acesso, custos e contrato antes de ligar API bancária real.\n\n## Dependências\n\nB03, B04\n\n## Critérios de aceite\n\n- [ ] Verificar produto/acesso da conta PJ, endpoints, custos e limites disponíveis.\n- [ ] Adaptador mock/sandbox com paginação, timeout, retries e deduplicação.\n- [ ] Secrets por ambiente; test/staging sem conta real.\n- [ ] Definir frequência de atualização e fechamento/conferência diária com o dono.\n- [ ] Nenhum pagamento enviado; conexão real depende de autorização e ambiente preparado.\n\n## Validação\n\nSimular timeout, paginação, repetição e indisponibilidade; comparar com importação de arquivo. Se API não estiver disponível, registrar decisão e manter extrato.\n",
+    "status": "Backlog",
+    "priority": "P2",
+    "order": 17,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "W01",
+    "phase": "Frontend",
+    "title": "[W01] Iniciar Angular e conectar autenticação",
+    "dependencies": [
+      "B05",
+      "F07"
+    ],
+    "body": "## Objetivo\n\nCriar o frontend depois da API validada, mantendo secrets no backend.\n\n## Dependências\n\nB05, F07\n\n## Critérios de aceite\n\n- [ ] Versões exatas e lockfile; lint/typecheck/build/test na CI sem checks fictícios.\n- [ ] Configuração pública por ambiente, sem senha/token de banco embutido.\n- [ ] Login, sessão/expiração e rotas protegidas; backend mantém autorização.\n- [ ] Interface simples, acessível e com erros/estados de carregamento.\n\n## Validação\n\nTestar sessão expirada, acesso negado e build reproduzível; inspecionar bundle para ausência de secrets.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 18,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "W02",
+    "phase": "Frontend",
+    "title": "[W02] Criar telas de contas, importação e conciliação",
+    "dependencies": [
+      "W01",
+      "B01",
+      "B03",
+      "B04"
+    ],
+    "body": "## Objetivo\n\nPermitir consultar dados e resolver pendências com feedback claro.\n\n## Dependências\n\nW01, B01, B03, B04\n\n## Critérios de aceite\n\n- [ ] Listagens com filtros/paginação e valores monetários corretos.\n- [ ] Upload limitado com resultado por lote, erros e proteção contra envio duplicado.\n- [ ] Pendências/divergências visíveis e confirmação autorizada com justificativa.\n- [ ] Estados vazios, falhas de rede e navegação por teclado tratados.\n\n## Validação\n\nFluxo E2E de importar, reimportar, conferir pendência e conciliar; usuário sem permissão recebe bloqueio na API.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 19,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "W03",
+    "phase": "Frontend",
+    "title": "[W03] Exibir gráficos e relatórios mensais",
+    "dependencies": [
+      "W02",
+      "B05"
+    ],
+    "body": "## Objetivo\n\nApresentar comparações confiáveis com base na API financeira.\n\n## Dependências\n\nW02, B05\n\n## Critérios de aceite\n\n- [ ] Mês selecionado/anterior com entradas, saídas e saldo coerentes.\n- [ ] Gráfico e tabela exibem mesma fonte de dados e filtros.\n- [ ] Pendências, valores ausentes e período vazio identificados.\n- [ ] Exportação inicial definida com o dono, sem inventar documentos fiscais/contábeis.\n\n## Validação\n\nConferir totais da tela, tabela e API com dataset conhecido; testar virada de ano e ausência de movimento.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 20,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "W04",
+    "phase": "Frontend",
+    "title": "[W04] Homologar fluxo completo e liberar MVP",
+    "dependencies": [
+      "W03",
+      "B06",
+      "F10"
+    ],
+    "body": "## Objetivo\n\nValidar a primeira entrega com o dono e evidência de operação/recuperação.\n\n## Dependências\n\nW03, B06, F10\n\n## Critérios de aceite\n\n- [ ] E2E autenticação -> importação -> conciliação -> relatório em staging.\n- [ ] Dono valida totais/fluxo; pendências e limites documentados.\n- [ ] Restauração, monitoramento e procedimento de suporte conferidos.\n- [ ] Release/tag/changelog e promoção do mesmo digest após aprovação explícita.\n- [ ] Integração bancária por API é opcional conforme B07; extrato é caminho válido do MVP.\n\n## Validação\n\nRegistrar evidências sintéticas de homologação, recuperação e release. Smoke tests de prod sem movimentar dinheiro real.\n",
+    "status": "Backlog",
+    "priority": "P1",
+    "order": 21,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "X01",
+    "phase": "Descoberta futura",
+    "title": "[X01] Detalhar bot da prefeitura e viabilidade",
+    "dependencies": [],
+    "body": "## Objetivo\n\nDescobrir a automação de requisições solicitada pelo dono sem expandir o MVP silenciosamente.\n\n## Dependências\n\nNenhuma.\n\n## Critérios de aceite\n\n- [ ] Identificar portal, ações necessárias, autorização de acesso, dados e custo.\n- [ ] Verificar API oficial, MFA/CAPTCHA/limites e termos de operação.\n- [ ] Definir alternativa manual, auditoria e gestão segura de credenciais.\n- [ ] Aprovar escopo separado antes de implementação; nenhuma credencial no Git.\n\n## Validação\n\nProduzir descrição do fluxo e orçamento com evidência autorizada. Não ativar bot nesta issue.\n",
+    "status": "Backlog",
+    "priority": "P3",
+    "order": 22,
+    "blocked": false,
+    "block_reason": ""
+  },
+  {
+    "id": "X02",
+    "phase": "Descoberta futura",
+    "title": "[X02] Detalhar pagamentos automáticos e controles",
+    "dependencies": [
+      "B07",
+      "F10"
+    ],
+    "body": "## Objetivo\n\nConfirmar necessidade e controles antes de qualquer envio de pagamentos.\n\n## Dependências\n\nB07, F10\n\n## Critérios de aceite\n\n- [ ] Dono confirma se pagamentos são necessários e quais tipos.\n- [ ] Definir aprovações, limites, segregação de funções e dupla confirmação.\n- [ ] Propor idempotência, estados, conciliação pós-envio e tratamento de retorno incerto.\n- [ ] Usar apenas sandbox na prova futura; autorização específica antes de dinheiro real.\n\n## Validação\n\nDocumento com fluxo, riscos, custos e critérios de aceite para uma etapa futura; sem chamar endpoint real de pagamento.\n",
+    "status": "Backlog",
+    "priority": "P3",
+    "order": 23,
+    "blocked": false,
+    "block_reason": ""
+  }
+]

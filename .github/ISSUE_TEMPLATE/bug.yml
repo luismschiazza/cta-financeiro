@@ -1,0 +1,22 @@
+name: Erro
+description: Falha com reprodução e resultado esperado
+title: "fix: "
+body:
+  - type: textarea
+    id: reproducao
+    attributes:
+      label: Como reproduzir
+      description: Ambiente, versão e passos. Use apenas dados fictícios.
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Resultado esperado e observado
+    validations:
+      required: true
+  - type: textarea
+    id: impacto
+    attributes:
+      label: Impacto
+      description: Há erro em saldo, acesso ou perda de dados?

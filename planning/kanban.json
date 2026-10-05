@@ -1,0 +1,34 @@
+{
+  "name": "CTA Financeiro",
+  "source": "issues.json",
+  "columns": [
+    {
+      "name": "Backlog",
+      "wip_limit": null
+    },
+    {
+      "name": "A fazer",
+      "wip_limit": 3
+    },
+    {
+      "name": "Em andamento",
+      "wip_limit": 1
+    },
+    {
+      "name": "Em revisão",
+      "wip_limit": 1
+    },
+    {
+      "name": "Concluído",
+      "wip_limit": null
+    }
+  ],
+  "active_wip_limit": 2,
+  "priorities": {
+    "P0": "Fundação obrigatória",
+    "P1": "MVP financeiro e frontend",
+    "P2": "Integração bancária opcional",
+    "P3": "Descoberta futura fora do MVP"
+  },
+  "blocked_is_flag": true
+}

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CTA Financeiro — Kanban</title>
+<style>
+:root { color-scheme:light dark; --bg:light-dark(#f4f5f7,#111820); --fg:light-dark(#17212b,#eef3f7); --surface:light-dark(#fff,#1c2732); --line:light-dark(#ccd4dc,#43505e); --muted:light-dark(#445363,#bac7d4); --flag:light-dark(#7d3800,#ffba78); }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui,sans-serif; }
+main { max-width:1600px; margin:auto; padding:24px; }
+h1 { margin:0 0 8px; font-size:28px; }
+h2 { font-size:18px; margin:0 0 4px; }
+p { margin:8px 0; }
+a { color:inherit; }
+.caption { color:var(--muted); }
+.board { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px; align-items:start; margin:24px 0; }
+.column { min-width:0; }
+.column > header { padding-bottom:12px; border-bottom:2px solid var(--line); margin-bottom:12px; }
+.card { padding:14px; border:1px solid var(--line); border-radius:8px; background:var(--surface); margin:0 0 12px; overflow-wrap:anywhere; }
+summary { cursor:pointer; font-weight:600; }
+.meta { color:var(--muted); font-size:14px; }
+.block { color:var(--flag); font-size:14px; }
+.card section { margin-top:12px; }
+ul { padding-left:20px; margin:8px 0; }
+li { margin:6px 0; }
+.empty { color:var(--muted); }
+.legend { display:flex; flex-wrap:wrap; gap:8px 24px; padding:12px 0; }
+footer { border-top:1px solid var(--line); padding-top:16px; }
+@media(max-width:1150px) { .board { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:760px) { .board { grid-template-columns:repeat(2,minmax(0,1fr)); } main { padding:16px; } }
+@media(max-width:490px) { .board { grid-template-columns:1fr; } }
+@media print { body { background:#fff; color:#000; } .board { display:block; } .card { break-inside:avoid; } }
+</style>
+</head>
+<body>
+<main>
+<h1>CTA Financeiro — Kanban</h1>
+<p>Fundação → Backend e banco → Frontend</p>
+<p class="caption">Retrato inicial do planejamento · 23 tarefas · GitHub ainda não publicado</p>
+<p><a href="../docs/kanban.md">Regras do fluxo</a> · <a href="../docs/backlog.md">Critérios completos</a></p>
+<div class="legend" aria-label="Prioridades"><span>P0 · Fundação</span><span>P1 · MVP</span><span>P2 · Integração opcional</span><span>P3 · Descoberta futura</span></div>
+<div class="board" aria-label="Quadro Kanban">
+
+<section class="column" aria-label="Backlog"><header><h2>Backlog · 22</h2><span class="meta">Sem limite</span></header>
+<article class="card" data-issue="F02" data-status="Backlog">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F02] Iniciar backend e fixar ferramentas e versões</summary>
+<section><p>Criar apps/api com NestJS e TypeScript estrito, sem módulos financeiros.</p><p><strong>Dependências:</strong> F01</p><strong>Critérios de aceite</strong><ul>
+<li>Node/npm/Nest/TypeScript/Jest e PostgreSQL verificados e versões exatas registradas; ORM decidido na F05.</li>
+<li>package-lock.json e configuração do runtime versionados; instalação com npm ci.</li>
+<li>ESLint, formatação, typecheck, build e testes configurados com comandos reais.</li>
+<li>Endpoint de saúde mínimo e teste com resposta esperada; sem passWithNoTests.</li>
+</ul><p><strong>Validação:</strong> Instalar do zero, executar lint/typecheck/build e testar saúde. Registrar versões e comandos no README.</p></section></details>
+</article>
+<article class="card" data-issue="F03" data-status="Backlog">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F03] Validar configuração e separar ambientes</summary>
+<section><p>Falhar cedo quando a configuração do ambiente estiver ausente, inválida ou incompatível.</p><p><strong>Dependências:</strong> F02</p><strong>Critérios de aceite</strong><ul>
+<li>Contrato .env.example atualizado com a estratégia real; secrets fora do Git.</li>
+<li>APP_ENV, portas, URLs, banco, CORS, TLS e secrets validados no startup.</li>
+<li>Testes rejeitam destino de produção e integrações reais; confirmar identidade do destino.</li>
+<li>Erros e logs não mostram credenciais; pagamentos desabilitados no MVP.</li>
+</ul><p><strong>Validação:</strong> Testar configurações válidas e inválidas de cada ambiente, placeholders e tentativa de conectar test a prod.</p></section></details>
+</article>
+<article class="card" data-issue="F04" data-status="Backlog">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F04] Subir PostgreSQL local e banco descartável de testes</summary>
+<section><p>Permitir desenvolver e testar banco/API com recursos isolados e reproduzíveis.</p><p><strong>Dependências:</strong> F02, F03</p><strong>Critérios de aceite</strong><ul>
+<li>Compose local com imagem fixada, porta em loopback, healthcheck e volume próprio.</li>
+<li>Banco test descartável por execução e sem acesso ao banco local/dev.</li>
+<li>Usuários de aplicação e migrations separados; secrets de exemplo são fictícios.</li>
+<li>Documentar comandos para criar/testar/remover somente recursos descartáveis; preservar banco de estudo.</li>
+</ul><p><strong>Validação:</strong> Inicializar local e test, conferir isolamento e permissões; demonstrar remoção do banco de teste sem afetar local.</p></section></details>
+</article>
+<article class="card" data-issue="F05" data-status="Backlog">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F05] Criar mecanismo de migrations e instalação reproduzível</summary>
+<section><p>Escolher uma única ferramenta/ORM e versionar o schema sem sincronização automática.</p><p><strong>Dependências:</strong> F04</p><strong>Critérios de aceite</strong><ul>
+<li>Decisão curta sobre ORM e migrations; synchronize/destructive reset desabilitados.</li>
+<li>Comandos reais para criar, aplicar e consultar estado das migrations.</li>
+<li>Histórico/checksum e exclusão mútua definidos; aplicação não faz DDL no startup.</li>
+<li>Instalação vazia e reexecução sem efeito duplicado; estratégia de upgrade validada.</li>
+<li>Banco de estudo preservado e plano de adaptação explícito; seeds fictícios separados.</li>
+</ul><p><strong>Validação:</strong> Aplicar migrations em PostgreSQL novo, reexecutar e testar alteração indevida no histórico. Validar upgrade de uma base aprovada.</p></section></details>
+</article>
+<article class="card" data-issue="F06" data-status="Backlog">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F06] Completar CI com banco, testes e segurança</summary>
+<section><p>Bloquear merge quando código, migrations ou validações essenciais falharem.</p><p><strong>Dependências:</strong> F02, F03, F04, F05</p><strong>Critérios de aceite</strong><ul>
+<li>Checks de lint, typecheck, unit, integration, migrations, build e security executam comandos reais.</li>
+<li>Integração usa PostgreSQL descartável; migrations testam banco vazio e upgrade.</li>
+<li>Scanner de segredos, dependências e workflows configurado; vulnerabilidades altas/críticas relevantes bloqueiam.</li>
+<li>required-checks falha em job ausente, cancelado ou com erro; sem mascarar falhas.</li>
+<li>Actions por SHA, menor privilégio e checks obrigatórios configurados no GitHub.</li>
+</ul><p><strong>Validação:</strong> PR válido passa; introduzir falha controlada em build, constraint, migration e scan para comprovar bloqueio. Remover as falhas antes do merge.</p></section></details>
+</article>
+<article class="card" data-issue="F07" data-status="Backlog">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F07] Implementar autenticação e permissões</summary>
+<section><p>Proteger a API antes de disponibilizar dados financeiros.</p><p><strong>Dependências:</strong> F06</p><strong>Critérios de aceite</strong><ul>
+<li>Estratégia de sessão/token documentada com hashing seguro de senha e validade/revogação.</li>
+<li>Perfis mínimos definidos com o dono e permissão por operação.</li>
+<li>Usuário inicial criado por procedimento seguro, sem senha fixa versionada.</li>
+<li>Tentativas de acesso inválidas limitadas e logs sem credenciais.</li>
+</ul><p><strong>Validação:</strong> Testar login válido/inválido, expiração/revogação e acesso negado por perfil; autenticação sozinha não basta.</p></section></details>
+</article>
+<article class="card" data-issue="F08" data-status="Backlog">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F08] Adicionar auditoria e observabilidade</summary>
+<section><p>Rastrear ações sensíveis e diagnosticar falhas sem expor dados pessoais.</p><p><strong>Dependências:</strong> F07</p><strong>Critérios de aceite</strong><ul>
+<li>Auditoria com ator, instante, ação e referência; identidade da aplicação não apaga histórico.</li>
+<li>Logs estruturados com correlação e redação de secrets/dados pessoais.</li>
+<li>Endpoints de health/liveness/readiness adequados sem divulgar detalhes privados.</li>
+<li>Alertas mínimos e regras de retenção/acesso documentados.</li>
+</ul><p><strong>Validação:</strong> Executar ação permitida e negada, conferir eventos, falha de banco e ausência de tokens/extratos nos logs.</p></section></details>
+</article>
+<article class="card" data-issue="F09" data-status="Backlog">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F09] Preparar entrega em dev e staging</summary>
+<section><p>Escolher infraestrutura e promover o mesmo artefato entre ambientes isolados.</p><p><strong>Dependências:</strong> F06, F08</p><strong>Critérios de aceite</strong><ul>
+<li>Hospedagem/registry/secrets escolhidos com orçamento e configuração documentada.</li>
+<li>Dev e staging com bancos, contas e redes próprios; apenas dados sintéticos ou anonimizados.</li>
+<li>Build gera SHA/digest/versão; promoção usa mesmo artefato com CI aprovada.</li>
+<li>Migrations executadas uma vez por ambiente com credencial separada; deploy serializado.</li>
+<li>Smoke tests e falha de promoção registrados; sem cancelar migrations em andamento.</li>
+</ul><p><strong>Validação:</strong> Publicar candidato em dev e staging; conferir digest igual, isolamento e bloqueio de candidato com CI reprovada.</p></section></details>
+</article>
+<article class="card" data-issue="F10" data-status="Backlog">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F10] Validar backup, recuperação e liberação de produção</summary>
+<section><p>Preparar produção com evidência de recuperação e aprovação humana.</p><p><strong>Dependências:</strong> F09</p><strong>Critérios de aceite</strong><ul>
+<li>RPO/RTO/retenção/responsável definidos com o dono e custos avaliados.</li>
+<li>Backup criptografado fora do host, monitorado e sem permissão de exclusão para a aplicação.</li>
+<li>Restauração em ambiente isolado mede tempo e valida schema, contagens e totais.</li>
+<li>Prod isolada; liberação explícita e mesmo digest aprovado em staging.</li>
+<li>Rollback de aplicação e procedimento de falha de migration documentados; sem restauração automática.</li>
+</ul><p><strong>Validação:</strong> Simular perda/falha com dados fictícios e comprovar recuperação dentro dos objetivos. Validar mecanismo real de aprovação; não lançar operações reais nesta issue.</p></section></details>
+</article>
+<article class="card" data-issue="B01" data-status="Backlog">
+<p class="meta">P1 · Backend e banco</p>
+<details><summary>[B01] Cadastrar e consultar contas bancárias</summary>
+<section><p>Entregar o primeiro módulo financeiro com migration, API e permissão.</p><p><strong>Dependências:</strong> F07, F08, F10</p><strong>Critérios de aceite</strong><ul>
+<li>Migration de contas com PK, campos obrigatórios e estado ativo/inativo.</li>
+<li>DTO, serviço e consultas parametrizadas; paginação e autorização.</li>
+<li>Dados fictícios Bradesco PJ para desenvolvimento; seeds fora de produção.</li>
+<li>Não excluir conta com histórico financeiro; auditar mudanças.</li>
+</ul><p><strong>Validação:</strong> Testar cadastro/consulta, payload inválido, perfil sem acesso e constraint de conta vinculada.</p></section></details>
+</article>
+<article class="card" data-issue="B02" data-status="Backlog">
+<p class="meta">P1 · Backend e banco</p>
+<details><summary>[B02] Registrar movimentações e regras de dinheiro</summary>
+<section><p>Persistir movimentações exatas, rastreáveis e vinculadas à conta.</p><p><strong>Dependências:</strong> B01, F05</p><strong>Critérios de aceite</strong><ul>
+<li>Migration com FK, valor NUMERIC positivo, tipo permitido e datas apropriadas.</li>
+<li>Identificador externo composto com conta quando presente; regra para origem sem ID.</li>
+<li>Decimal/string no contrato; rejeitar precisão indevida e campos inválidos.</li>
+<li>Preservar origem/histórico; correção autorizada e auditada.</li>
+<li>Regras aplicadas em serviço e banco, inclusive concorrência.</li>
+</ul><p><strong>Validação:</strong> Testar valores zero/negativos/limites, FK inválida, dinheiro exato, duplicidade concorrente e transações legítimas semelhantes.</p></section></details>
+</article>
+<article class="card" data-issue="B03" data-status="Backlog">
+<p class="meta">P1 · Backend e banco</p>
+<details><summary>[B03] Importar extratos por lote sem duplicar</summary>
+<section><p>Importar um formato de extrato confirmado a partir de amostra fictícia/sanitizada.</p><p><strong>Dependências:</strong> B02</p><strong>Critérios de aceite</strong><ul>
+<li>Formato escolhido após examinar amostra; limites de tamanho/linhas e parser seguro.</li>
+<li>Lote registra origem, referência, status, contagens e erros sem expor dados em logs.</li>
+<li>Reimportação/concorrência não duplicam movimentações; falha/retomada rastreáveis.</li>
+<li>Linhas ambíguas ficam visíveis para análise; não descartar somente por data/valor iguais.</li>
+<li>Arquivo real fica fora do Git e possui política de acesso/retenção.</li>
+</ul><p><strong>Validação:</strong> Importar arquivo válido, inválido, repetido e concorrente; simular falha parcial e retomada, comparando contagem e saldo.</p></section></details>
+</article>
+<article class="card" data-issue="B04" data-status="Backlog">
+<p class="meta">P1 · Backend e banco</p>
+<details><summary>[B04] Conciliar movimentações e mostrar divergências</summary>
+<section><p>Conferir registros com a fonte e manter pendências até a confirmação.</p><p><strong>Dependências:</strong> B03</p><strong>Critérios de aceite</strong><ul>
+<li>Estados e critérios de conciliação definidos com o dono.</li>
+<li>API lista pendências, confirma e registra divergências com justificativa/ator.</li>
+<li>Conferência respeita saldo inicial, entradas e saídas; transações atômicas.</li>
+<li>Histórico não é sobrescrito silenciosamente; permissão para correções.</li>
+</ul><p><strong>Validação:</strong> Validar exemplo 1000 + 200 + 300 - 150 = 1350; exercitar confirmação, divergência, correção e acesso negado.</p></section></details>
+</article>
+<article class="card" data-issue="B05" data-status="Backlog">
+<p class="meta">P1 · Backend e banco</p>
+<details><summary>[B05] Gerar resumo mensal e comparar meses</summary>
+<section><p>Expor totais consistentes para relatórios e gráficos futuros.</p><p><strong>Dependências:</strong> B04</p><strong>Critérios de aceite</strong><ul>
+<li>API com entradas, saídas, saldo e comparação de mês selecionado/anterior.</li>
+<li>Fuso, data de competência bancária e critérios das categorias definidos.</li>
+<li>Categorias financeiras com migrations/validações, se necessárias ao relatório.</li>
+<li>Total confere com movimentações e tratamento de pendências é explícito.</li>
+<li>Sem chamar saldo/fluxo de caixa de lucro contábil; consultas paginadas/indexadas conforme necessidade.</li>
+</ul><p><strong>Validação:</strong> Testar mês vazio, virada de ano/mês, categorias, pendências e soma exata com conjunto conhecido.</p></section></details>
+</article>
+<article class="card" data-issue="B06" data-status="Backlog">
+<p class="meta">P1 · Backend e banco</p>
+<details><summary>[B06] Conferir dados do legado para importação</summary>
+<section><p>Mapear e validar cópia dos dados antigos antes de migrá-los para operação.</p><p><strong>Dependências:</strong> B05</p><strong>Critérios de aceite</strong><ul>
+<li>Leitura da fonte sem alterar legado; mapear tabelas e regras financeiras.</li>
+<li>Ensaio com cópia autorizada fora do Git, origem e resultado rastreáveis.</li>
+<li>Comparar contagens, totais e divergências; normalizar datas/decimais explicitamente.</li>
+<li>Importação retomável/idempotente com relatório; aprovação operacional antes de dados reais.</li>
+</ul><p><strong>Validação:</strong> Usar amostra controlada, comparar registros/totais e simular reexecução. Documentar divergências sem publicar dados sensíveis.</p></section></details>
+</article>
+<article class="card" data-issue="W01" data-status="Backlog">
+<p class="meta">P1 · Frontend</p>
+<details><summary>[W01] Iniciar Angular e conectar autenticação</summary>
+<section><p>Criar o frontend depois da API validada, mantendo secrets no backend.</p><p><strong>Dependências:</strong> B05, F07</p><strong>Critérios de aceite</strong><ul>
+<li>Versões exatas e lockfile; lint/typecheck/build/test na CI sem checks fictícios.</li>
+<li>Configuração pública por ambiente, sem senha/token de banco embutido.</li>
+<li>Login, sessão/expiração e rotas protegidas; backend mantém autorização.</li>
+<li>Interface simples, acessível e com erros/estados de carregamento.</li>
+</ul><p><strong>Validação:</strong> Testar sessão expirada, acesso negado e build reproduzível; inspecionar bundle para ausência de secrets.</p></section></details>
+</article>
+<article class="card" data-issue="W02" data-status="Backlog">
+<p class="meta">P1 · Frontend</p>
+<details><summary>[W02] Criar telas de contas, importação e conciliação</summary>
+<section><p>Permitir consultar dados e resolver pendências com feedback claro.</p><p><strong>Dependências:</strong> W01, B01, B03, B04</p><strong>Critérios de aceite</strong><ul>
+<li>Listagens com filtros/paginação e valores monetários corretos.</li>
+<li>Upload limitado com resultado por lote, erros e proteção contra envio duplicado.</li>
+<li>Pendências/divergências visíveis e confirmação autorizada com justificativa.</li>
+<li>Estados vazios, falhas de rede e navegação por teclado tratados.</li>
+</ul><p><strong>Validação:</strong> Fluxo E2E de importar, reimportar, conferir pendência e conciliar; usuário sem permissão recebe bloqueio na API.</p></section></details>
+</article>
+<article class="card" data-issue="W03" data-status="Backlog">
+<p class="meta">P1 · Frontend</p>
+<details><summary>[W03] Exibir gráficos e relatórios mensais</summary>
+<section><p>Apresentar comparações confiáveis com base na API financeira.</p><p><strong>Dependências:</strong> W02, B05</p><strong>Critérios de aceite</strong><ul>
+<li>Mês selecionado/anterior com entradas, saídas e saldo coerentes.</li>
+<li>Gráfico e tabela exibem mesma fonte de dados e filtros.</li>
+<li>Pendências, valores ausentes e período vazio identificados.</li>
+<li>Exportação inicial definida com o dono, sem inventar documentos fiscais/contábeis.</li>
+</ul><p><strong>Validação:</strong> Conferir totais da tela, tabela e API com dataset conhecido; testar virada de ano e ausência de movimento.</p></section></details>
+</article>
+<article class="card" data-issue="W04" data-status="Backlog">
+<p class="meta">P1 · Frontend</p>
+<details><summary>[W04] Homologar fluxo completo e liberar MVP</summary>
+<section><p>Validar a primeira entrega com o dono e evidência de operação/recuperação.</p><p><strong>Dependências:</strong> W03, B06, F10</p><strong>Critérios de aceite</strong><ul>
+<li>E2E autenticação -&gt; importação -&gt; conciliação -&gt; relatório em staging.</li>
+<li>Dono valida totais/fluxo; pendências e limites documentados.</li>
+<li>Restauração, monitoramento e procedimento de suporte conferidos.</li>
+<li>Release/tag/changelog e promoção do mesmo digest após aprovação explícita.</li>
+<li>Integração bancária por API é opcional conforme B07; extrato é caminho válido do MVP.</li>
+</ul><p><strong>Validação:</strong> Registrar evidências sintéticas de homologação, recuperação e release. Smoke tests de prod sem movimentar dinheiro real.</p></section></details>
+</article>
+<article class="card" data-issue="B07" data-status="Backlog">
+<p class="meta">P2 · Backend e banco</p>
+<details><summary>[B07] Avaliar integração Bradesco com mock ou sandbox</summary>
+<section><p>Confirmar acesso, custos e contrato antes de ligar API bancária real.</p><p><strong>Dependências:</strong> B03, B04</p><strong>Critérios de aceite</strong><ul>
+<li>Verificar produto/acesso da conta PJ, endpoints, custos e limites disponíveis.</li>
+<li>Adaptador mock/sandbox com paginação, timeout, retries e deduplicação.</li>
+<li>Secrets por ambiente; test/staging sem conta real.</li>
+<li>Definir frequência de atualização e fechamento/conferência diária com o dono.</li>
+<li>Nenhum pagamento enviado; conexão real depende de autorização e ambiente preparado.</li>
+</ul><p><strong>Validação:</strong> Simular timeout, paginação, repetição e indisponibilidade; comparar com importação de arquivo. Se API não estiver disponível, registrar decisão e manter extrato.</p></section></details>
+</article>
+<article class="card" data-issue="X01" data-status="Backlog">
+<p class="meta">P3 · Descoberta futura</p>
+<details><summary>[X01] Detalhar bot da prefeitura e viabilidade</summary>
+<section><p>Descobrir a automação de requisições solicitada pelo dono sem expandir o MVP silenciosamente.</p><p><strong>Dependências:</strong> Nenhuma</p><strong>Critérios de aceite</strong><ul>
+<li>Identificar portal, ações necessárias, autorização de acesso, dados e custo.</li>
+<li>Verificar API oficial, MFA/CAPTCHA/limites e termos de operação.</li>
+<li>Definir alternativa manual, auditoria e gestão segura de credenciais.</li>
+<li>Aprovar escopo separado antes de implementação; nenhuma credencial no Git.</li>
+</ul><p><strong>Validação:</strong> Produzir descrição do fluxo e orçamento com evidência autorizada. Não ativar bot nesta issue.</p></section></details>
+</article>
+<article class="card" data-issue="X02" data-status="Backlog">
+<p class="meta">P3 · Descoberta futura</p>
+<details><summary>[X02] Detalhar pagamentos automáticos e controles</summary>
+<section><p>Confirmar necessidade e controles antes de qualquer envio de pagamentos.</p><p><strong>Dependências:</strong> B07, F10</p><strong>Critérios de aceite</strong><ul>
+<li>Dono confirma se pagamentos são necessários e quais tipos.</li>
+<li>Definir aprovações, limites, segregação de funções e dupla confirmação.</li>
+<li>Propor idempotência, estados, conciliação pós-envio e tratamento de retorno incerto.</li>
+<li>Usar apenas sandbox na prova futura; autorização específica antes de dinheiro real.</li>
+</ul><p><strong>Validação:</strong> Documento com fluxo, riscos, custos e critérios de aceite para uma etapa futura; sem chamar endpoint real de pagamento.</p></section></details>
+</article>
+</section>
+<section class="column" aria-label="A fazer"><header><h2>A fazer · 1</h2><span class="meta">Limite 3</span></header>
+<article class="card" data-issue="F01" data-status="A fazer">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F01] Configurar repositório privado e regras do GitHub</summary>
+<section><p>Publicar a fundação e aplicar as regras reais do repositório.</p><p><strong>Dependências:</strong> Nenhuma</p><strong>Critérios de aceite</strong><ul>
+<li>Repositório privado criado com main, README, templates e documentação.</li>
+<li>Workflow foundation executado com sucesso e check configurado conforme plano disponível.</li>
+<li>Squash, PR, bloqueio de force push/exclusão e resolução de conversas configurados onde suportados.</li>
+<li>Backlog aberto como issues com dependências; limitações de proteção registradas.</li>
+</ul><p><strong>Validação:</strong> Conferir visibilidade, SHA, execução de Actions e evidências das configurações em docs/github-setup.md.</p></section></details>
+<p class="block"><strong>Bloqueada:</strong> Publicação no GitHub aguarda autorização para acesso pelo navegador.</p>
+</article>
+</section>
+<section class="column" aria-label="Em andamento"><header><h2>Em andamento · 0</h2><span class="meta">Limite 1</span></header>
+<p class="empty">Nenhuma tarefa.</p>
+</section>
+<section class="column" aria-label="Em revisão"><header><h2>Em revisão · 0</h2><span class="meta">Limite 1</span></header>
+<p class="empty">Nenhuma tarefa.</p>
+</section>
+<section class="column" aria-label="Concluído"><header><h2>Concluído · 0</h2><span class="meta">Sem limite</span></header>
+<p class="empty">Nenhuma tarefa.</p>
+</section>
+</div>
+<footer>
+<p><strong>Limites:</strong> 1 tarefa em andamento e 1 em revisão; máximo de 2 no trabalho ativo.</p>
+<p>Concluir exige critérios atendidos, validação registrada e mudança integrada. Bloqueio conserva a coluna e exige motivo.</p>
+<p class="caption">Quadro de consulta gerado dos dados versionados. Abra os cartões para ver o aceite. Alterações de estado são feitas em issues.json; este arquivo não altera o GitHub.</p>
+</footer>
+</main>
+</body>
+</html>
