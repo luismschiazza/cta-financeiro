@@ -2,7 +2,7 @@
 
 Sistema financeiro para a clínica CTA, com conferência de movimentações bancárias, conciliação, receitas, despesas e relatórios mensais.
 
-**Situação:** fundação e planejamento. Este pacote contém documentação, modelos do GitHub e uma CI de estrutura. Ainda não contém aplicação NestJS/Angular, migrations executáveis, integrações reais nem deploy. O repositório remoto e suas proteções precisam ser configurados.
+**Situação:** fundação publicada no GitHub, 23 issues e Kanban configurados. A `main` exige PR, CI `foundation` aprovada e squash, com force push e exclusão bloqueados. Ainda não há aplicação NestJS/Angular, migrations executáveis, integrações reais ou deploy. As configurações verificadas estão em [Configuração do GitHub](docs/github-setup.md).
 
 ## Objetivo da primeira entrega
 
@@ -71,7 +71,7 @@ No Windows, use `py -3 scripts/check_foundation.py`. A CI faz essa mesma verific
 
 ## Próxima execução
 
-Aplicar as configurações de F01 no GitHub. Depois iniciar F02: estrutura mínima do backend, ferramentas e versões fixadas. As demais issues seguem o [Kanban](docs/kanban.md): Backlog, A fazer, Em andamento, Em revisão e Concluído, com uma tarefa em implementação por vez. Não conectar banco real ou executar pagamentos nesta etapa.
+F01 configura a fundação remota e registra suas evidências. A próxima tarefa é [F02 — iniciar backend e fixar ferramentas e versões](https://github.com/luismschiazza/cta-financeiro/issues/2). As demais issues seguem o [Kanban](docs/kanban.md): Backlog, A fazer, Em andamento, Em revisão e Concluído, com uma tarefa em implementação por vez. Não conectar banco real ou executar pagamentos nesta etapa.
 
 ## Progresso anterior
 
@@ -79,4 +79,4 @@ No estudo local, foi criado `cta_financeiro_dev`, com `contas_bancarias` e `movi
 
 ## Uso
 
-Projeto privado. Não há licença aberta concedida por este repositório. Não versionar dados de pacientes, extratos reais, credenciais ou backups.
+Repositório público por decisão do dono; o Project de planejamento é privado. Não há licença aberta concedida por este repositório. Não versionar dados de pacientes, extratos reais, credenciais ou backups.
