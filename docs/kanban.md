@@ -34,19 +34,17 @@ Bloqueado é um marcador com motivo, não uma sexta coluna. O cartão conserva s
 | P2 | Integração bancária opcional |
 | P3 | Bot da prefeitura e pagamentos: descoberta futura |
 
-## Estado inicial
+## Estado após F01 — 06/10/2026
 
-23 cartões: 22 no Backlog e F01 em A fazer, com bloqueio de publicação no GitHub. Nenhum cartão está em andamento, revisão ou concluído. Os arquivos da fundação estão preparados; F01 continua pendente porque o repositório e suas proteções ainda não foram publicados.
+[Project privado CTA Financeiro — Kanban](https://github.com/users/luismschiazza/projects/1/views/1), ligado às mesmas 23 issues do repositório. F01 concluída, F02 em A fazer e as outras 21 no Backlog, após integrar e validar a entrega de F01. O bloqueio anterior de publicação foi resolvido. A próxima tarefa é F02, para iniciar o NestJS; as tarefas Angular continuam após B05.
 
-A próxima tarefa é F01. Depois vem F02, para iniciar o NestJS. Cada issue financeira entrega backend, migration e testes juntos; as tarefas Angular continuam após B05.
+O quadro usa Status com as cinco colunas acima, Priority (P0–P3), Phase, Order (1–23) e Blocked (Sim/Não). A ordenação é Priority e depois Order. Os limites 3/1/1 estão configurados nas colunas; o limite total de duas tarefas ativas permanece uma política conferida antes de cada movimentação. Os números do GitHub correspondem à ordem: F01 #1, F02 #2, ..., X02 #23.
 
-## Aplicação futura no GitHub Projects
+## Operação do GitHub Project
 
-Criar Project privado com visualização Board e agrupamento por Status. Configurar as cinco opções acima; campos Priority (P0–P3), Phase, Order e Blocked. Ligar os cartões às issues reais do repositório, mantendo os IDs F/B/W/X e dependências nos corpos. Ordenar por Priority e Order. Não criar issues duplicadas para representar cartões.
+As issues reais contêm referências às dependências pelos números do GitHub. Não criar issues duplicadas para representar cartões. O check local valida os limites e estados do snapshot versionado; não altera o Project remoto. Conferir ambos quando atualizar o retrato.
 
-Limites WIP são políticas da equipe; o quadro não garante seu bloqueio automaticamente. O check local valida limites e estados do snapshot versionado. Na operação do Project, revisar limites antes de mover cartões e manter o snapshot atualizado quando ele for usado como registro.
-
-Evitar automação que marque concluído apenas por criação ou merge de PR: conferir também aceite e evidências. A criação do Project e das issues reais ainda está pendente de acesso ao GitHub.
+Não marcar Concluído apenas por criação ou merge de PR. As automações do Project que concluíam por merge ou avançavam ao vincular PR foram desabilitadas; o fechamento automático de issues por merge também está desabilitado. Depois de verificar aceite, CI e integração, fechar a issue: a automação de issue fechada move o cartão para Concluído. Novos itens entram no Backlog.
 
 ## Atualizar o retrato do quadro
 
