@@ -1,6 +1,5 @@
 name: Tarefa
 description: Objetivo pequeno com resultado verificável
-title: ""
 body:
   - type: textarea
     id: objetivo
