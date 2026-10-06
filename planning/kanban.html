@@ -42,17 +42,7 @@ footer { border-top:1px solid var(--line); padding-top:16px; }
 <div class="legend" aria-label="Prioridades"><span>P0 · Fundação</span><span>P1 · MVP</span><span>P2 · Integração opcional</span><span>P3 · Descoberta futura</span></div>
 <div class="board" aria-label="Quadro Kanban">
 
-<section class="column" aria-label="Backlog"><header><h2>Backlog · 22</h2><span class="meta">Sem limite</span></header>
-<article class="card" data-issue="F02" data-status="Backlog">
-<p class="meta">P0 · Fundação</p>
-<details><summary>[F02] Iniciar backend e fixar ferramentas e versões</summary>
-<section><p>Criar apps/api com NestJS e TypeScript estrito, sem módulos financeiros.</p><p><strong>Dependências:</strong> F01</p><strong>Critérios de aceite</strong><ul>
-<li>Node/npm/Nest/TypeScript/Jest e PostgreSQL verificados e versões exatas registradas; ORM decidido na F05.</li>
-<li>package-lock.json e configuração do runtime versionados; instalação com npm ci.</li>
-<li>ESLint, formatação, typecheck, build e testes configurados com comandos reais.</li>
-<li>Endpoint de saúde mínimo e teste com resposta esperada; sem passWithNoTests.</li>
-</ul><p><strong>Validação:</strong> Instalar do zero, executar lint/typecheck/build e testar saúde. Registrar versões e comandos no README.</p></section></details>
-</article>
+<section class="column" aria-label="Backlog"><header><h2>Backlog · 21</h2><span class="meta">Sem limite</span></header>
 <article class="card" data-issue="F03" data-status="Backlog">
 <p class="meta">P0 · Fundação</p>
 <details><summary>[F03] Validar configuração e separar ambientes</summary>
@@ -274,16 +264,15 @@ footer { border-top:1px solid var(--line); padding-top:16px; }
 </article>
 </section>
 <section class="column" aria-label="A fazer"><header><h2>A fazer · 1</h2><span class="meta">Limite 3</span></header>
-<article class="card" data-issue="F01" data-status="A fazer">
+<article class="card" data-issue="F02" data-status="A fazer">
 <p class="meta">P0 · Fundação</p>
-<details><summary>[F01] Configurar repositório privado e regras do GitHub</summary>
-<section><p>Publicar a fundação e aplicar as regras reais do repositório.</p><p><strong>Dependências:</strong> Nenhuma</p><strong>Critérios de aceite</strong><ul>
-<li>Repositório privado criado com main, README, templates e documentação.</li>
-<li>Workflow foundation executado com sucesso e check configurado conforme plano disponível.</li>
-<li>Squash, PR, bloqueio de force push/exclusão e resolução de conversas configurados onde suportados.</li>
-<li>Backlog aberto como issues com dependências; limitações de proteção registradas.</li>
-</ul><p><strong>Validação:</strong> Conferir visibilidade, SHA, execução de Actions e evidências das configurações em docs/github-setup.md.</p></section></details>
-<p class="block"><strong>Bloqueada:</strong> Publicação no GitHub aguarda autorização para acesso pelo navegador.</p>
+<details><summary>[F02] Iniciar backend e fixar ferramentas e versões</summary>
+<section><p>Criar apps/api com NestJS e TypeScript estrito, sem módulos financeiros.</p><p><strong>Dependências:</strong> F01</p><strong>Critérios de aceite</strong><ul>
+<li>Node/npm/Nest/TypeScript/Jest e PostgreSQL verificados e versões exatas registradas; ORM decidido na F05.</li>
+<li>package-lock.json e configuração do runtime versionados; instalação com npm ci.</li>
+<li>ESLint, formatação, typecheck, build e testes configurados com comandos reais.</li>
+<li>Endpoint de saúde mínimo e teste com resposta esperada; sem passWithNoTests.</li>
+</ul><p><strong>Validação:</strong> Instalar do zero, executar lint/typecheck/build e testar saúde. Registrar versões e comandos no README.</p></section></details>
 </article>
 </section>
 <section class="column" aria-label="Em andamento"><header><h2>Em andamento · 0</h2><span class="meta">Limite 1</span></header>
@@ -292,8 +281,17 @@ footer { border-top:1px solid var(--line); padding-top:16px; }
 <section class="column" aria-label="Em revisão"><header><h2>Em revisão · 0</h2><span class="meta">Limite 1</span></header>
 <p class="empty">Nenhuma tarefa.</p>
 </section>
-<section class="column" aria-label="Concluído"><header><h2>Concluído · 0</h2><span class="meta">Sem limite</span></header>
-<p class="empty">Nenhuma tarefa.</p>
+<section class="column" aria-label="Concluído"><header><h2>Concluído · 1</h2><span class="meta">Sem limite</span></header>
+<article class="card" data-issue="F01" data-status="Concluído">
+<p class="meta">P0 · Fundação</p>
+<details><summary>[F01] Configurar repositório e regras do GitHub</summary>
+<section><p>Publicar a fundação e aplicar as regras reais do repositório.</p><p><strong>Dependências:</strong> Nenhuma</p><strong>Critérios de aceite</strong><ul>
+<li>Repositório público conforme decisão do dono, com main, README, templates e documentação; Project privado.</li>
+<li>Workflow foundation executado com sucesso e check configurado conforme plano disponível.</li>
+<li>Squash, PR, bloqueio de force push/exclusão e resolução de conversas configurados onde suportados.</li>
+<li>Backlog aberto como issues com dependências; limitações de proteção registradas.</li>
+</ul><p><strong>Validação:</strong> Conferir visibilidade, SHA, execução de Actions e evidências das configurações em docs/github-setup.md.</p></section></details>
+</article>
 </section>
 </div>
 <footer>

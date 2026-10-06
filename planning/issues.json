@@ -2,14 +2,14 @@
   {
     "id": "F01",
     "phase": "Fundação",
-    "title": "[F01] Configurar repositório privado e regras do GitHub",
+    "title": "[F01] Configurar repositório e regras do GitHub",
     "dependencies": [],
-    "body": "## Objetivo\n\nPublicar a fundação e aplicar as regras reais do repositório.\n\n## Dependências\n\nNenhuma.\n\n## Critérios de aceite\n\n- [ ] Repositório privado criado com main, README, templates e documentação.\n- [ ] Workflow foundation executado com sucesso e check configurado conforme plano disponível.\n- [ ] Squash, PR, bloqueio de force push/exclusão e resolução de conversas configurados onde suportados.\n- [ ] Backlog aberto como issues com dependências; limitações de proteção registradas.\n\n## Validação\n\nConferir visibilidade, SHA, execução de Actions e evidências das configurações em docs/github-setup.md.\n",
-    "status": "A fazer",
+    "body": "## Objetivo\n\nPublicar a fundação e aplicar as regras reais do repositório.\n\n## Dependências\n\nNenhuma.\n\n## Critérios de aceite\n\n- [ ] Repositório público conforme decisão do dono, com main, README, templates e documentação; Project privado.\n- [ ] Workflow foundation executado com sucesso e check configurado conforme plano disponível.\n- [ ] Squash, PR, bloqueio de force push/exclusão e resolução de conversas configurados onde suportados.\n- [ ] Backlog aberto como issues com dependências; limitações de proteção registradas.\n\n## Validação\n\nConferir visibilidade, SHA, execução de Actions e evidências das configurações em docs/github-setup.md.\n",
+    "status": "Concluído",
     "priority": "P0",
     "order": 1,
-    "blocked": true,
-    "block_reason": "Publicação no GitHub aguarda autorização para acesso pelo navegador."
+    "blocked": false,
+    "block_reason": ""
   },
   {
     "id": "F02",
@@ -19,7 +19,7 @@
       "F01"
     ],
     "body": "## Objetivo\n\nCriar apps/api com NestJS e TypeScript estrito, sem módulos financeiros.\n\n## Dependências\n\nF01\n\n## Critérios de aceite\n\n- [ ] Node/npm/Nest/TypeScript/Jest e PostgreSQL verificados e versões exatas registradas; ORM decidido na F05.\n- [ ] package-lock.json e configuração do runtime versionados; instalação com npm ci.\n- [ ] ESLint, formatação, typecheck, build e testes configurados com comandos reais.\n- [ ] Endpoint de saúde mínimo e teste com resposta esperada; sem passWithNoTests.\n\n## Validação\n\nInstalar do zero, executar lint/typecheck/build e testar saúde. Registrar versões e comandos no README.\n",
-    "status": "Backlog",
+    "status": "A fazer",
     "priority": "P0",
     "order": 2,
     "blocked": false,
