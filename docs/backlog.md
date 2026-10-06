@@ -2,7 +2,7 @@
 
 [Quadro e regras Kanban](kanban.md).
 
-IDs F/B/W/X são referências internas; números reais do GitHub serão ligados após a criação das issues. Todas estão pendentes; parte documental de F01 já está preparada, mas a publicação e as proteções ainda não foram aplicadas.
+IDs F/B/W/X são referências internas. As 23 issues já estão publicadas, na mesma ordem: F01 #1, F02 #2, ..., X02 #23. Após integrar e validar F01, ela está concluída, F02 está em A fazer e as demais permanecem no Backlog. As evidências estão em [Configuração do GitHub](github-setup.md).
 
 A fundação F01–F10 vem antes do código financeiro. O código financeiro evolui com banco e backend na mesma issue. O frontend começa depois de B05. B07 pode ocorrer em paralelo lógico com o restante do backend após B04, sem múltiplos agentes editando a mesma branch. X01/X02 são descoberta futura fora do MVP.
 
@@ -10,8 +10,8 @@ F09/F10 dependem de decisões de infraestrutura e RPO/RTO; não criar recursos p
 
 | ID | Status | Prioridade | Fase | Tarefa | Dependências |
 | --- | --- | --- | --- | --- | --- |
-| F01 | A fazer (bloqueada) | P0 | Fundação | Configurar repositório privado e regras do GitHub | Nenhuma |
-| F02 | Backlog | P0 | Fundação | Iniciar backend e fixar ferramentas e versões | F01 |
+| F01 | Concluído | P0 | Fundação | Configurar repositório e regras do GitHub | Nenhuma |
+| F02 | A fazer | P0 | Fundação | Iniciar backend e fixar ferramentas e versões | F01 |
 | F03 | Backlog | P0 | Fundação | Validar configuração e separar ambientes | F02 |
 | F04 | Backlog | P0 | Fundação | Subir PostgreSQL local e banco descartável de testes | F02, F03 |
 | F05 | Backlog | P0 | Fundação | Criar mecanismo de migrations e instalação reproduzível | F04 |
@@ -36,7 +36,7 @@ F09/F10 dependem de decisões de infraestrutura e RPO/RTO; não criar recursos p
 
 ## Critérios completos
 
-### [F01] Configurar repositório privado e regras do GitHub
+### [F01] Configurar repositório e regras do GitHub
 
 ## Objetivo
 
@@ -48,7 +48,7 @@ Nenhuma.
 
 ## Critérios de aceite
 
-- [ ] Repositório privado criado com main, README, templates e documentação.
+- [ ] Repositório público conforme decisão do dono, com main, README, templates e documentação; Project privado.
 - [ ] Workflow foundation executado com sucesso e check configurado conforme plano disponível.
 - [ ] Squash, PR, bloqueio de force push/exclusão e resolução de conversas configurados onde suportados.
 - [ ] Backlog aberto como issues com dependências; limitações de proteção registradas.
